@@ -1,5 +1,4 @@
-h1 {
-}
+h1 {}
 
 form {
   /*border-radius:5px;*/
@@ -10,7 +9,7 @@ form {
 }
 
 .col-sm-2.col-form-label {
-  font-size:small;
+  font-size: small;
 }
 
 .card {
@@ -18,3 +17,23 @@ form {
   /*border:1px solid #d8d5d5;*/
 }
 
+#getAttributeLabel {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+li:nth-of-type(odd) {
+  background-color: #f4f4f4;
+}
+
+.list-group-item {
+  background-color: #ffffff;
+}
+
+.h2, h2 {
+  color: rgb(167, 55, 55);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
