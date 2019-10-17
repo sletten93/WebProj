@@ -1,20 +1,6 @@
-h1 {}
-
-form {
-  /*border-radius:5px;*/
-  /*border-width:1px;*/
-  /*border-style:solid;*/
-  /*border-bottom-color:black;*/
-  /*background-color:white;*/
-}
 
 .col-sm-2.col-form-label {
   font-size: small;
-}
-
-.card {
-  /*box-shadow:0 0px 0px rgba(0,0,0,0.4);*/
-  /*border:1px solid #d8d5d5;*/
 }
 
 #getAttributeLabel {
