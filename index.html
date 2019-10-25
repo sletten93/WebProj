@@ -25,9 +25,9 @@
           <div class="card-body">
             <form class="d-block">
               <div class="form-group row"><label for="attribute-list" class="col-sm-2 col-form-label"><strong>Add</strong></label>
-                <div class="col-sm-10"><select class="form-control" id="attribute-list">
+                <div class="col-sm-10"><select id="additionOptions" class="form-control" id="attribute-list">
                     <optgroup label="This is a group">
-                      <option value="12" selected="">This is item 1</option>
+                      <option value="/api/addSport/:">Add a sport</option>
                       <option value="13">This is item 2</option>
                       <option value="14">This is item 3</option>
                     </optgroup>
@@ -49,7 +49,10 @@
                 <div class="col-sm-10"><input class="form-control" type="text" required="" minlength="1" id="val5"></div>
               </div>
               <div class="form-row">
-                <div class="col"><button class="btn btn-light btn-block" type="button" value="Submit" style="background-color:rgb(239,239,239);">Submit</button></div>
+                <div id="submitButton" class="col">
+                  <p>{{url}}</p>
+                  <button v-on:click="serverCall" class="btn btn-light btn-block" type="button" value="Submit" style="background-color:rgb(239,239,239);">Submit</button>
+                </div>
               </div>
             </form>
           </div>
@@ -73,8 +76,11 @@
     </div>
   </div>
   </div>
+
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/vue/vue.js"></script>
+  <script src="assets/vue/app.vue"></script>
 </body>
 
 </html>
