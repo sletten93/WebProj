@@ -1,8 +1,5 @@
 var app = new Vue({
 
-
-
-
   el: '#submitButton',
 
   data: {
@@ -16,11 +13,11 @@ var app = new Vue({
     serverCall: function() {
 
       temp = document.getElementById('additionOptions');
-      this.url = temp.options[temp.selectedIndex].value;
-      console.log(this.url);
+      this.url = "/api/" + temp.options[temp.selectedIndex].value;
       this.url += document.getElementById('val1').value;
+      console.log('ADDING: ' + this.url);
 
-      //axios.post(this.url);
+      //axios.post('http://sportstatsweb.jls-sto1.elastx.net/' + this.url);
 
     }
   }
