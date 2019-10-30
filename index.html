@@ -10,7 +10,16 @@
 </head>
 
 <body style="background-color:linen;">
+
+  <!-- <div  class="testtest1" v-for="result in results">
+  <div class="card">
+      {{ result.name }}
+    </div>
+</div> -->
+
   <div id="app" class="container" style="max-width:1050px;">
+
+
     <div class="row">
       <div class="col">
         <h2 style="color:maroon;">SportStats</h2>
@@ -59,6 +68,7 @@
               <div class="form-row">
                 <div id="submitButton" class="col">
                   <p>{{url}}</p>
+
                   <button v-on:click="serverCall" class="btn btn-light btn-block" type="button" value="Submit" style="background-color:rgb(239,239,239);">Submit</button>
                 </div>
               </div>
@@ -71,13 +81,18 @@
           <div class="card-header">
             <h5 class="text-center mb-0">Get Data</h5>
           </div>
-          <div class="card-body"><label id="getAttributeLabel">Data</label>
-            <ul class="list-group">
+          <div class="card-body"><label id="rightSideCard">Data</label>
+            <ul v-if="results && results.length">
+              <li v-for="result of results" v-bind:key="result.id">
+                <p>{{result.name}}</p>
+              </li>
+            </ul>
+            <!-- <ul class="list-group">
               <li class="list-group-item"><span>List Group Item 1</span></li>
               <li class="list-group-item"><span>List Group Item 2</span></li>
               <li class="list-group-item"><span>List Group Item 3</span></li>
               <li class="list-group-item"><span>List Group Item 4</span></li>
-            </ul><button class="btn btn-danger btn-block" type="button" value="Submit" style="margin-top:15px;background-color:#bc5454;">Back</button>
+            </ul><button class="btn btn-danger btn-block" type="button" value="Submit" style="margin-top:15px;background-color:#bc5454;">Back</button> -->
           </div>
         </div>
       </div>

@@ -5,13 +5,20 @@ var app = new Vue({
 
   data: {
 
-
+    API_URL: 'http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/listAllSports',
     url: 'HEJHEJ',
     selected: "selected",
     key: "",
-    info: null
+    info: null,
 
-    names: []
+    results: {
+
+      showing: [],
+      name: [],
+      id: []
+    }
+
+
 
     // optgroup: ''
   },
@@ -31,11 +38,13 @@ var app = new Vue({
 
       //  axios.get('https://cors-anywhere.herokuapp.com/http://sportstatsweb.jls-sto1.elastx.net/api/listAllSports')
 
+      //this.results = response.data[0].name
 
-
-      axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/listAllSports').then(response => (this.url = response.data, this.names = response.data));
+      axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/listAllSports').then(response => (this.results = response.data));
 
       //axios.get('http://sportstatsweb.jls-sto1.elastx.net/api/listAllSports').then(res => {}).catch(err => {});
+
+      console.log(this.results);
 
     },
 
@@ -43,7 +52,13 @@ var app = new Vue({
       console.log(this.key);
       // this.selected = event.target.value;
       // console.log(this.selected);
-    }
+    },
+
+    // getName(pk) {
+    //
+    //   const temp = `${API_URL}/api/listAllSports/${pk}`;
+    //   return axios.get(temp).then(response => response.data);
+    // }
 
 
 
