@@ -5,7 +5,7 @@ var app = new Vue({
 
   data: {
 
-    url: 'HEJHEJ',
+    url: '',
     key: "",
     values: [],
     inputs: []
@@ -17,27 +17,14 @@ var app = new Vue({
       this.url = '';
       this.url = "api/" + this.key;
       this.urlInputs = '';
-      // this.inputs.forEach(function(element){
-      //   this.urlInputs = element;
-      // });
-      // this.url += urlInputs;
       for (var i = 0; i < this.inputs.length; i++){
         this.url += this.inputs[i]+ '/';
         console.log('THIS.URL', this.url)
       }
       this.url = this.url.slice(0, -1);
-      // this.url += document.getElementById('val1').value;
       console.log('ADDING: ' + this.url);
-      // $http.post('http://sportstatsweb.jls-sto1.elastx.net/');
-      // axios.post('http://sportstatsweb.jls-sto1.elastx.net/' + this.url);
 
       this.url = 'http://sportstatsweb.jls-sto1.elastx.net/' + this.url;
-
-
-
-      // var redirectWindow = window.open('http://sportstatsweb.jls-sto1.elastx.net/' + this.url);
-      // redirectWindow.location;
-
     },
 
     optClick: function optClick(event) {
