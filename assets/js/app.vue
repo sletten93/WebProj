@@ -13,12 +13,12 @@ var app = new Vue({
 
     results: {
 
-      showing: [],
       name: [],
-      id: []
-    }
+      id: [],
+      homeGoals: []
+    },
 
-
+    rightSideHeadline: null
 
     // optgroup: ''
   },
@@ -30,19 +30,12 @@ var app = new Vue({
 
       this.url += document.getElementById('val1').value;
       console.log('ADDING: ' + this.url);
-      // $http.post('http://sportstatsweb.jls-sto1.elastx.net/');
-      // axios.post('http://sportstatsweb.jls-sto1.elastx.net/' + this.url);
-
-      //var redirectWindow = window.open('http://sportstatsweb.jls-sto1.elastx.net/' + this.url);
-      //redirectWindow.location;
-
-      //  axios.get('https://cors-anywhere.herokuapp.com/http://sportstatsweb.jls-sto1.elastx.net/api/listAllSports')
-
-      //this.results = response.data[0].name
 
       axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/listAllSports').then(response => (this.results = response.data));
 
-      //axios.get('http://sportstatsweb.jls-sto1.elastx.net/api/listAllSports').then(res => {}).catch(err => {});
+      // axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/listGameWithResult/3').then(response => (this.results = response.data));
+
+
 
       console.log(this.results);
 

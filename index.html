@@ -87,6 +87,12 @@
                 <p>{{result.name}}</p>
               </li>
             </ul>
+            <ul v-if="results && results.length && results.homeGoals">
+              <li v-for="result of results" v-bind:key="result.id">
+                <p>{{result.homeGoals}}</p>
+              </li>
+            </ul>
+
             <!-- <ul class="list-group">
               <li class="list-group-item"><span>List Group Item 1</span></li>
               <li class="list-group-item"><span>List Group Item 2</span></li>
