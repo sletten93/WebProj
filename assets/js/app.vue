@@ -6,42 +6,113 @@ var app = new Vue({
   data: {
 
     url: '',
-    key: "",
+    key: '',
     serverResponse: '',
     showDataType: 'addData',
     values: [],
-    inputs: []
+    inputs: [],
+    getDataInputLabel: '',
+    results: {
+      name: [],
+      id: [],
+      homeGoals: [],
+      awayGoals: [],
+      roundId: [],
+      homeTeam: null,
+      awayTeam: null,
+      gameArena: [],
+      startYear: [],
+      endYear: [],
+      maxRounds: [],
+      dateOfGame: []
+    },
   },
 
   methods: {
 
     serverCall: function() {
-      this.url = '';
-      this.url = "api/" + this.key;
-      this.urlInputs = '';
-      for (var i = 0; i < this.inputs.length; i++){
-        this.url += this.inputs[i]+ '/';
-      }
-      this.url = this.url.slice(0, -1);
-      console.log('ADDING: ' + this.url);
-      // this.url = 'http://sportstatsweb.jls-sto1.elastx.net/' + this.url;
+      // Om typen är Add Data
+      if (this.showDataType === 'addData'){
 
-      axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/' + this.url)
-      .then(response => (this.serverResponse = response.data));
+        //Se om alla värden saknas
+
+        if(this.inputs.length === 0) {
+          alert('You have not entered a single value!');
+          this.inputs = [];
+          return;
+        }
+
+        else {
+
+        //Se om något värde saknas
+        for(var o = 0; o < this.values.length; o++) {
+          if (this.inputs[o] == null) {
+              alert('You need to enter ' + this.values.length + ' different values!');
+              this.inputs = [];
+              return;
+            }
+          }
+        }
+        this.url = this.key;
+        for (var i = 0; i < this.inputs.length; i++){
+          this.url += this.inputs[i]+ '/';
+        }
+        this.url = this.url.slice(0, -1);
+        console.log('ADDING: ' + this.url);
+        // this.url = 'http://sportstatsweb.jls-sto1.elastx.net/' + this.url;
+
+        axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/' + this.url)
+        .then(response => (this.serverResponse = response.data));
+      }
+      // Annars om typen är Get Data
+      else if (this.showDataType === 'getData'){
+        this.url = this.key;
+        if (this.inputs.length > 0){
+          this.url += this.inputs[0];
+        } else if (this.inputs[0] == null){
+          alert('You have not entered a value!');
+          this.inputs = [];
+          return;
+        }
+        axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/' + this.url)
+        .then(response => (this.results = response.data));
+      }
     },
 
     optionChangeEvent: function() {
+
       if (this.showDataType === 'addData'){
         this.setAddDataParameters();
       }
-      else {
+      else if (this.showDataType === 'getData'){
+        this.setGetDataParameters();
+      }
+    },
 
+    setGetDataParameters: function(){
+      this.getDataInputLabelLabel = '';
+      if (this.key == 'listAllLeaguesBySport/'){
+        this.getDataInputLabel = 'Sport ID';
+      }
+      else if (this.key == 'listAllSeasonsForLeague/' || this.key == 'listAllGamesForSeason/'){
+        this.getDataInputLabel = 'League ID';
+      }
+      else if (this.key == 'listAllGamesByDate/'){
+        this.getDataInputLabel = 'Date';
+      }
+      else if (this.key == 'listAllGamesForTeam/'
+      || this.key == 'listAllGamesLostByTeam/'
+      || this.key == 'listAllGamesWonByTeam/'
+      || this.key == 'listAllAwayGamesForTeam/'
+      || this.key == 'listAllHomeGamesForTeam/'){
+        this.getDataInputLabel = 'Team ID';
+      }
+      else if (this.key == 'listGamesWithResultByRound/'){
+        this.getDataInputLabel = 'Round ID';
       }
     },
 
     setAddDataParameters: function() {
-
-      // console.log(this.key);
       this.values = [];
       this.inputs = [];
       this.serverResponse = '';

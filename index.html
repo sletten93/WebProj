@@ -102,7 +102,7 @@
                         <option value="listAllLeaguesBySport/">All leagues</option>
                         <option value="listAllSeasonsForLeague/">All seasons</option>
                         <option value="listAllGamesByDate/">All games by date</option>
-                        <option value="listAllGamesForSeason/">All away games for season</option>
+                        <option value="listAllGamesForSeason/">All games for season</option>
                         <option value="listAllGamesForTeam/">All games for team</option>
                         <option value="listAllGamesLostByTeam/">All games lost by team</option>
                         <option value="listAllGamesWonByTeam/">all games won by team</option>
@@ -112,6 +112,10 @@
                         <!-- <option value="listSeasonTable/"></option> -->
                       </optgroup>
                     </select></div>
+                </div>
+                <div v-if="getDataInputLabel.length > 0" class="form-group row"><label for="val1" class="col-sm-2 col-form-label"
+                  style="max-width:30%;min-width:15%;width:auto;">{{getDataInputLabel}}</label>
+                  <div class="col-sm-10"><input v-model="inputs[0]" class="form-control" type="text" required="" minlength="1" id="val1"></div>
                 </div>
               </div>
 
@@ -137,12 +141,29 @@
             <h5 class="text-center mb-0">Data Output</h5>
           </div>
           <div class="card-body">
-            <ul class="list-group">
-              <li class="list-group-item"><span>List Group Item 1</span></li>
-              <li class="list-group-item"><span>List Group Item 2</span></li>
-              <li class="list-group-item"><span>List Group Item 3</span></li>
-              <li class="list-group-item"><span>List Group Item 4</span></li>
-            </ul><button class="btn btn-danger btn-block" type="button" value="Submit" style="margin-top:15px;background-color:#bc5454;">Back</button>
+            <div v-if="key === 'listAllSeasonsForLeague/'">
+              <ul class="list-group" v-if="results && results.length">
+                <li v-for="value of results" v-bind:key="value.id">
+                  <center>ID: {{value.id}} - Start Year: {{value.startYear}} - End Year: {{value.endYear}} - Max Rounds: {{value.maxRounds}}</center>
+                </li>
+              </ul>
+            </div>
+            <div v-else-if="key.includes('Games')">
+              <ul class="list-group" v-if="results && results.length">
+                <li v-for="value of results" v-bind:key="value.id">
+                  <center>ID: {{value.id}} - Home Team: {{value.homeTeam}} - Home Goals: {{value.homeGoals}} - Away Team: {{value.awayTeam}}
+                     - Away Goals: {{value.awayGoals}} - Arena: {{value.gameArena}} - Round ID: {{value.roundId}}</center>
+                </li>
+              </ul>
+            </div>
+            <div v-else>
+              <ul class="list-group" v-if="results && results.length">
+                <li v-for="value of results" v-bind:key="value.id">
+                  <center>ID: {{value.id}} - Name: {{value.name}}</center>
+                </li>
+              </ul>
+            </div>
+            <!-- <button class="btn btn-danger btn-block" type="button" value="Submit" style="margin-top:15px;background-color:#bc5454;">Back</button> -->
           </div>
         </div>
       </div>
