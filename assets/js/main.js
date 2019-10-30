@@ -1,8 +1,11 @@
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axiosApi from 'axios';
 
-//.use(VueAxios, axios)
-//Vue.prototype.$http = axios
-//Vue.prototype.$axios = axios
-window.axios = require('axios');
+const axios = axiosApi.create({
+  baseURL:`your_base_url`,
+  headers:{ header:value }
+});
+
+
+
+//Use the window object to make it available globally.
+window.axios = axios;

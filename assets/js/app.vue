@@ -7,6 +7,8 @@ var app = new Vue({
 
     url: '',
     key: "",
+    serverResponse: '',
+    showDataType: 'addData',
     values: [],
     inputs: []
   },
@@ -19,18 +21,30 @@ var app = new Vue({
       this.urlInputs = '';
       for (var i = 0; i < this.inputs.length; i++){
         this.url += this.inputs[i]+ '/';
-        console.log('THIS.URL', this.url)
       }
       this.url = this.url.slice(0, -1);
       console.log('ADDING: ' + this.url);
+      // this.url = 'http://sportstatsweb.jls-sto1.elastx.net/' + this.url;
 
-      this.url = 'http://sportstatsweb.jls-sto1.elastx.net/' + this.url;
+      axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/' + this.url)
+      .then(response => (this.serverResponse = response.data));
     },
 
-    optClick: function optClick(event) {
+    optionChangeEvent: function() {
+      if (this.showDataType === 'addData'){
+        this.setAddDataParameters();
+      }
+      else {
+
+      }
+    },
+
+    setAddDataParameters: function() {
+
       // console.log(this.key);
       this.values = [];
       this.inputs = [];
+      this.serverResponse = '';
 
       if (this.key == 'addSport/'){
         this.values[0] = 'Sport Name';
@@ -77,9 +91,13 @@ var app = new Vue({
       }
       else if (this.key == 'connectRoundToSeason/'){
         this.values[0] = 'Round ID';
-        this.values[0] = 'Season ID';
+        this.values[1] = 'Season ID';
       }
     }
+
+
+
+
 
 
 
