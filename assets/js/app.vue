@@ -31,6 +31,7 @@ var app = new Vue({
   methods: {
 
     serverCall: function() {
+      serverResponseText = '';
       // Om typen är Add Data
       if (this.showDataType === 'addData'){
 
@@ -70,10 +71,15 @@ var app = new Vue({
 
               alert('You were not able to add the data.');
             }
-            else {
+            else if(this.serverResponse == true){
 
               alert('Data added successfully');
             }
+            else {
+              alert(response.data.detailMessage);
+            }
+
+            // inputs = [];
         });
 
       }
