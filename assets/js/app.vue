@@ -112,7 +112,7 @@ var app = new Vue({
     },
 
     setGetDataParameters: function(){
-      this.getDataInputLabelLabel = '';
+      this.getDataInputLabel = '';
       if (this.key == 'listAllLeaguesBySport/'){
         this.getDataInputLabel = 'Sport ID';
       }
