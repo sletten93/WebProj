@@ -79,9 +79,9 @@ var app = new Vue({
               alert(response.data.detailMessage);
             }
 
-            // inputs = [];
-        });
 
+        });
+        this.inputs = [];
       }
       // Annars om showDataType är Get Data
       else if (this.showDataType === 'getData'){
@@ -97,7 +97,7 @@ var app = new Vue({
         axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/' + this.url)
         .then(response => (this.results = response.data));
 
-
+        this.inputs = [];
       }
     },
 
