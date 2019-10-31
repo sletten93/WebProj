@@ -68,11 +68,12 @@ var app = new Vue({
       else if (this.showDataType === 'getData'){
         this.url = this.key;
         if (this.inputs.length > 0){
+          if (this.inputs[0] == null){
+            alert('You have not entered a value!');
+            this.inputs = [];
+            return;
+          }
           this.url += this.inputs[0];
-        } else if (this.inputs[0] == null){
-          alert('You have not entered a value!');
-          this.inputs = [];
-          return;
         }
         axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/' + this.url)
         .then(response => (this.results = response.data));
