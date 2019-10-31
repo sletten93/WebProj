@@ -59,23 +59,39 @@ var app = new Vue({
         }
         this.url = this.url.slice(0, -1);
         console.log('ADDING: ' + this.url);
-        // this.url = 'http://sportstatsweb.jls-sto1.elastx.net/' + this.url;
 
         axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/' + this.url)
-        .then(response => (this.serverResponse = response.data));
+        .then( function(response) {
+            this.serverResponse = response.data;
+
+            console.log('Server response ' + this.serverResponse);
+
+            if(this.serverResponse == false) {
+
+              alert('You were not able to add the data.');
+            }
+            else {
+
+              alert('Data added successfully');
+            }
+        });
+
       }
-      // Annars om typen är Get Data
+      // Annars om showDataType är Get Data
       else if (this.showDataType === 'getData'){
         this.url = this.key;
         if (this.inputs.length > 0){
+          if (this.inputs[0] == null){
+            alert('You have not entered a value!');
+            this.inputs = [];
+            return;
+          }
           this.url += this.inputs[0];
-        } else if (this.inputs[0] == null){
-          alert('You have not entered a value!');
-          this.inputs = [];
-          return;
         }
         axios.get('http://localhost:3005/http://sportstatsweb.jls-sto1.elastx.net/api/' + this.url)
         .then(response => (this.results = response.data));
+
+
       }
     },
 
